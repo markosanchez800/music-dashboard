@@ -1,4 +1,5 @@
-const APIController = (function() {
+
+const spotifyAPIController = (function() {
     
     const clientID = '9577ec53580a46c686cbb0729d57118e';
     const clientSecret = '903925af8da34bbabffe55187620ca4b';
@@ -18,10 +19,30 @@ const APIController = (function() {
         const data = await result.json();
         return data.access_token;
     }
-});
 
-//2h7nX8Uc7KpgkKmZnE4tnBGP0yzawyfLAwqFGW8zSSuqDCj55bkMDGMgUcqPbxDP
+    const _getMusic = async (token) => {
 
-//pLkW4rvh-hn0_OaH47JxklZao3TDp2v1oRNBfNZJHr4VloIPx8-dHIswV-LsFbQEPiv5cT5c6o4aqD5D1kYM8w
+        const result = await fetch(`https://api.spotify.com/v1/search?q=name:${search}&type=artist` , {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        });
+
+        const data = await result.json();
+        return data;
+    };
+       
+    return getToken {
+        getToken();
+    },
+
+}); 
+
+
+
+// musix key 0d49953ffed1270bd1dd131b139e95d1
+
+
+
+
 
 
