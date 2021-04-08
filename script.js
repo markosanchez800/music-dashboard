@@ -1,136 +1,95 @@
+artistName = document.getElementById('artistname'),
+monthlyListen = document.getElementById('monthlyNumber')
+artistInfo = document.getElementById('artistInfo')
+trackOne = document.getElementById('trackOne')
+trackTwo = document.getElementById('trackTwo')
+trackThree = document.getElementById('trackThree')
+trackFour = document.getElementById('trackFour')
+trackFive = document.getElementById('trackFive')
+trackSix = document.getElementById('trackSix')
+trackSeven = document.getElementById('trackSeven')
+trackEight = document.getElementById('trackEight')
+trackNine = document.getElementById('trackNine')
+trackTen = document.getElementById('trackTen')
+ 
+  clientID = '9577ec53580a46c686cbb0729d57118e';
+  clientSecret = '903925af8da34bbabffe55187620ca4b';
 
-/*const spotifyAPIController = (function() {
-    
-    const clientID = '9577ec53580a46c686cbb0729d57118e';
-    const clientSecret = '903925af8da34bbabffe55187620ca4b';
+ /*const _getToken = async () => {
 
-    // private methods
-    const _getToken = async () => {
+   const result = await fetch('https://accounts.spotify.com/api/token', {
+       method: 'POST',
+       headers: {
+           'Content-Type' : 'application/x-www-form-urlencoded', 
+           'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
+       },
+       body: 'grant_type=client_credentials'
+   });
 
-        const result = await fetch('https://accounts.spotify.com/api/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded', 
-                'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
-            },
-            body: 'grant_type=client_credentials'
-        });
 
-        const data = await result.json();
-        return data.access_token;
-    }
-
-    const _getMusic = async (token) => {
-
-        const result = await fetch(`https://api.spotify.com/v1/search?q=name:${search}&type=artist` , {
-            method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + token}
-        });
-
-        const data = await result.json();
-        return data;
-    };
-       
-    return {
-        getToken() {
-            return _getToken();
-        },
-        getMusic(token) {
-            return _getMusic(token);
-        },
-    }
-
-}); 
-
-showMusic = (function(data){
-
-})
-
-*/
-
-/*
-var getArtist = function(input){
-    input = 'prince';
-    clientID = '9577ec53580a46c686cbb0729d57118e';
-    clientSecret = '903925af8da34bbabffe55187620ca4b';
-    oAuth = 'BQDHSLIcmF4IYbV1OCYO0uNFyaxlEPSv5ulEBajVZF3oWX7m6nMaRb5x9YykWMN3NoEi4XEYGW4qiY3vWE5hggZxtaau8d7akdQnUthRLp9RCsb8uGFPYvMPlDH_lveJVdQG6Cb29rAGxaaqZ1bgDes'
-    var apiUrl = 'https://api.spotify.com/v1/search?q=' + input + '&type=artist' + '/authorize?response_type=code&client_id=' + clientSecret + clientID;
-    fetch(apiUrl)
-    .then(function(response){
-        if (response.ok) {
-            response.json().then(function(data){
-                //displayWeather(data,city);
-                console.log(data);
-            });
-        } else {
-            alert('Error: ' + response.statusText);
-        }
-    })
-    .catch(function(error){
-        alert('Unable to connect to Spotify');
-    });
-};
-
-getArtist();
-*/
-
-// find template and compile it
-var templateSource = document.getElementById('results-template').innerHTML,
-  template = Handlebars.compile(templateSource),
-  resultsPlaceholder = document.getElementById('results'),
-  artistName = document.getElementById('artistname')
+   const data = await result.json();
+   return data.access_token;
   
-   clientID = '9577ec53580a46c686cbb0729d57118e';
-   clientSecret = '903925af8da34bbabffe55187620ca4b';
 
-  const _getToken = async () => {
-
-    const result = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded', 
-            'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
-        },
-        body: 'grant_type=client_credentials'
-    });
-
-
-    const data = await result.json();
-    return data.access_token;
-   
-
-}
+}*/
 
 var fetchTracks = function(albumId, callback) {
-  $.ajax({
-    url: 'https://api.spotify.com/v1/albums/' + albumId,
-    success: function(response) {
-      callback(response);
-    }
-  });
+ $.ajax({
+   url: 'https://api.spotify.com/v1/albums/' + albumId,
+   success: function(response) {
+     callback(response);
+   }
+ });
 };
 
-var searchAlbums = function(query) {
-  $.ajax({
-    url: 'https://api.spotify.com/v1/search',
-    data: {
-      q: query,
-      type: 'artist'
-    },
-    headers: {
-        "Authorization": "Bearer " + "BQCv2_5nrOUmh_jZ_ZSlTOz74Bjg4dI4TACqMiti_PSMk-XNOi9Zfmlz_-qlh-AU2_X-iJCHJapjCUuwwHdIKKK1PGoem40Luj31qrF7C8MsoupGTFfV8_Zq9TcTCZYJLeO5lFLlEYf6DgCv5xj7fu8"
-    },
-    success: function(response) {
-        resultsPlaceholder.innerHTML = JSON.stringify(response.artists.items[0].name + ' ' + response.artists.items[0].genres);
-      console.log(response);
-    }
-  });
+var searchArtists = function(query) {
+ $.ajax({
+   url: 'https://api.spotify.com/v1/search',
+   data: {
+     q: query,
+     type: 'artist'
+   },
+   headers: {
+       "Authorization": "Bearer " + "BQD0qmr5gYZvyz74hoLBHUN7Yptk_h3IB2kTp9BvgDonB4qcaveLVOIWm5EFHj4V_OKUNceMYckJvzv0K18DboT_BI7k3uYFyzzHqnw7nkcCKcnUI-Gk9mHS6eMc9LYJ8IrYiKZGSXag_YI3HIqFe5U"
+   },
+   success: function(response) {
+       artistInfo.setAttribute("background-image",response.artists.items[0].images[0].url);
+       artistName.innerHTML = JSON.stringify(response.artists.items[0].name);
+       monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
+       id = response.artists.items[0].id;
+       getTopTracks(id);
+     console.log(response);
+   }
+ });
+ 
 };
 
+var getTopTracks = function(id) {
+   $.ajax({
+     url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
+     headers: {
+         "Authorization": "Bearer " + "BQD0qmr5gYZvyz74hoLBHUN7Yptk_h3IB2kTp9BvgDonB4qcaveLVOIWm5EFHj4V_OKUNceMYckJvzv0K18DboT_BI7k3uYFyzzHqnw7nkcCKcnUI-Gk9mHS6eMc9LYJ8IrYiKZGSXag_YI3HIqFe5U"
+     },
+     success: function(response) {
+         trackOne.innerHTML = response.tracks[0].name;
+         trackTwo.innerHTML = response.tracks[1].name;
+         trackThree.innerHTML = response.tracks[2].name;
+         trackFour.innerHTML = response.tracks[3].name;
+         trackFive.innerHTML = response.tracks[4].name;
+         trackSix.innerHTML = response.tracks[5].name;
+         trackSeven.innerHTML = response.tracks[6].name;
+         trackEight.innerHTML = response.tracks[7].name;
+         trackNine.innerHTML = response.tracks[8].name;
+         trackTen.innerHTML = response.tracks[9].name;
+       console.log(response);
+     }
+   });
+ };
 
 document.getElementById('search-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  searchAlbums(document.getElementById('query').value);
+ e.preventDefault();
+ console.log('success!')
+ searchArtists(document.getElementById('searchbox').value);
 }, false);
 
 

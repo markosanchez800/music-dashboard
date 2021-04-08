@@ -56,7 +56,7 @@ h2 {
 .artistinfo {
     background-image:
     linear-gradient(to bottom, rgba(0,0,0,1), rgba(255,0,0,0)),
-    url('photo.jpg');
+    url('blacknwhite.jpeg');
     height: 400px;
     background-position: center;
     background-repeat: no-repeat;
@@ -81,3 +81,7 @@ p {
         color: white;
         padding-top: -20px;
     }
+
+li {
+    color: white;
+}
