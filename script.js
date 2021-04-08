@@ -50,10 +50,11 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQD0qmr5gYZvyz74hoLBHUN7Yptk_h3IB2kTp9BvgDonB4qcaveLVOIWm5EFHj4V_OKUNceMYckJvzv0K18DboT_BI7k3uYFyzzHqnw7nkcCKcnUI-Gk9mHS6eMc9LYJ8IrYiKZGSXag_YI3HIqFe5U"
+       "Authorization": "Bearer " + "BQCjy4MW9zK9O6nkIxp5y0n2XSV5dwxAs94joiIAD7i0xQZeHJ7O5Nn8-TkaWXL3re8m0jJWF8NWKNb6OZJLUp2Lvv0mirH3JnIbs_40Cny5V3VuNCc8fCBvvo5IniADV9SmHrLw-y7PNuhQLvwf3sA"
    },
    success: function(response) {
-       artistInfo.setAttribute("background-image",response.artists.items[0].images[0].url);
+       tempPic = response.artists.items[0].images[0].url;
+       artistInfo.setAttribute("style","background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(255,0,0,0)), url(" + tempPic + ")");
        artistName.innerHTML = JSON.stringify(response.artists.items[0].name);
        monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
        id = response.artists.items[0].id;
@@ -68,7 +69,7 @@ var getTopTracks = function(id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQD0qmr5gYZvyz74hoLBHUN7Yptk_h3IB2kTp9BvgDonB4qcaveLVOIWm5EFHj4V_OKUNceMYckJvzv0K18DboT_BI7k3uYFyzzHqnw7nkcCKcnUI-Gk9mHS6eMc9LYJ8IrYiKZGSXag_YI3HIqFe5U"
+         "Authorization": "Bearer " + "BQCjy4MW9zK9O6nkIxp5y0n2XSV5dwxAs94joiIAD7i0xQZeHJ7O5Nn8-TkaWXL3re8m0jJWF8NWKNb6OZJLUp2Lvv0mirH3JnIbs_40Cny5V3VuNCc8fCBvvo5IniADV9SmHrLw-y7PNuhQLvwf3sA"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -86,6 +87,14 @@ var getTopTracks = function(id) {
    });
  };
 
+ var getLyrics = function(arg){
+     $.ajax({
+         url: 'https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_track=' + arg + '&quorum_factor=1&apikey=0d49953ffed1270bd1dd131b139e95d1',
+         success: function(response) {
+             console.log(response);
+         }
+     })
+ }
 
 
  document.getElementById('search-form').addEventListener('submit', function(e) {
@@ -93,6 +102,7 @@ var getTopTracks = function(id) {
  console.log('success!')
  searchArtists(document.getElementById('searchbox').value);
  getMusicVideos(document.getElementById('searchbox').value);
+ getLyrics(document.getElementById('trackOne').textContent);
 }, false);
 
 
@@ -125,16 +135,10 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
                 addVideo();
         }
                 
-    // data.items.forEach(item => {
-    //     videos = `<iframe width="420" height="315" src="http://www.youtube.com/embed${item.id.videoId}" frameborder="0" allowfullscreen></iframe>`
-    //     musicVideos.append(video)
-    // })
 
   });
 
 }
-
-  //document.getElementById("search-form").addEventListener("click",getMusicVideos);
 
 
 // musix key 0d49953ffed1270bd1dd131b139e95d1

@@ -58,14 +58,14 @@ h2 {
       }
 
 .artistinfo {
-    background-image:
-    linear-gradient(to bottom, rgba(0,0,0,1), rgba(255,0,0,0)),
-    url('blacknwhite.jpeg');
-    height: 400px;
+    
+    height: 640px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     padding-left: 20px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,1), rgba(255,0,0,0));
       }
 
 .toptracks {
@@ -75,7 +75,7 @@ h2 {
           }
 
 .musicvideos {
-height: 200px;
+height: 450px;
 padding-left: 20px;
 background-color: white;
 }
