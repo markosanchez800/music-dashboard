@@ -25,3 +25,26 @@ const APIController = (function() {
 //pLkW4rvh-hn0_OaH47JxklZao3TDp2v1oRNBfNZJHr4VloIPx8-dHIswV-LsFbQEPiv5cT5c6o4aqD5D1kYM8w
 
 
+var musixmatchserch = 'https://api.musixmatch.com/ws/v1.1/track.lyrics.get?apikey=0d49953ffed1270bd1dd131b139e95d1'
+var musixmatchlyrics = 'https://api.musixmatch.com/ws/v1.1/track.search?apikey=0d49953ffed1270bd1dd131b139e95d1';
+
+
+function getAPI(){
+    musixmatchlyrics = 'https://api.musixmatch.com/ws/v1.1/track.lyrics.get?apikey=0d49953ffed1270bd1dd131b139e95d1';
+    fetch(musixmatchlyrics)
+        .then(function(response) {
+            console.log(response);
+            return response.json();
+        })
+        }
+       
+function getLyrics(){
+    musixmatchsearch = 'https://api.musixmatch.com/ws/v1.1/track.search?apikey=0d49953ffed1270bd1dd131b139e95d1';
+    fetch(musixmatchsearch)
+        .then(function(response) {
+            console.log(response);
+            return response.json();
+        })
+        
+        }
+       
