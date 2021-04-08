@@ -15,7 +15,7 @@ h2 {
     line-height: 10px;
 }
 
-#musicvideos{
+#musicvideosheader{
     padding-bottom: 0px;
     font-size: 48px;
     font-family: 'Oswald', sans-serif;
@@ -71,7 +71,6 @@ h2 {
           }
 
 .musicvideos {
-height: 200px;
 padding-left: 20px;
 background-color: white;
 }

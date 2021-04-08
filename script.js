@@ -1,27 +1,32 @@
-const APIController = (function() {
-    
-    const clientID = '9577ec53580a46c686cbb0729d57118e';
-    const clientSecret = '903925af8da34bbabffe55187620ca4b';
+var apiKey= "AIzaSyADNoOQ9XzgB7BUXeHVLhgIFbXlbjVRq5c";
+var maxResults = 10;
+var searchQuery = document.getElementById("searchbox")
+var video = ""
+var musicVideos = document.getElementById("musicvideos")
 
-    // private methods
-    const _getToken = async () => {
+function getMusicVideos(){
+var artistName = document.getElementById("searchbox").value;
+fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&part=snippet&maxResults='+maxResults+'&q='+artistName)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+    data.items.forEach(item => {
+        videos = `
 
-        const result = await fetch('https://accounts.spotify.com/api/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded', 
-                'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
-            },
-            body: 'grant_type=client_credentials'
-        });
-
-        const data = await result.json();
-        return data.access_token;
-    }
-});
-
-//2h7nX8Uc7KpgkKmZnE4tnBGP0yzawyfLAwqFGW8zSSuqDCj55bkMDGMgUcqPbxDP
-
-//pLkW4rvh-hn0_OaH47JxklZao3TDp2v1oRNBfNZJHr4VloIPx8-dHIswV-LsFbQEPiv5cT5c6o4aqD5D1kYM8w
+        <iframe width="420" height="315" src="http://www.youtube.com/embed${item.id.videoId}" frameborder="0" allowfullscreen></iframe>
 
 
+        `
+        musicVideos.append(video)
+    })
+
+  });
+
+}
+
+document.getElementById("submit").addEventListener("click", function(event){
+    event.preventDefault()
+  });
+  document.getElementById("submit").addEventListener("click",getMusicVideos);
