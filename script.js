@@ -15,9 +15,21 @@ trackTen = document.getElementById('trackTen')
   clientID = '9577ec53580a46c686cbb0729d57118e';
   clientSecret = '903925af8da34bbabffe55187620ca4b';
 
- /*const _getToken = async () => {
+  keyGen = function(){
+      tempPass = '';
+      charLim = 57;
+    possibleKeys= ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","x","y","z","0","1","2","3","4","5","6","7","8","9","_",".","-","~"];
+    for ( i=0; i < charLim; i++){
+        tempPass += possibleKeys[Math.floor(Math.random()*possibleKeys.length)];
+      }
+      console.log(tempPass);
+      return tempPass;
+      
+  }();
 
-   const result = await fetch('https://accounts.spotify.com/api/token', {
+  _getToken = function(){
+
+    result = fetch('https://accounts.spotify.com/api/token', {
        method: 'POST',
        headers: {
            'Content-Type' : 'application/x-www-form-urlencoded', 
@@ -27,20 +39,14 @@ trackTen = document.getElementById('trackTen')
    });
 
 
-   const data = await result.json();
+    data = result;
+    console.log(data);
    return data.access_token;
-  
+   
+   
 
-}*/
+}();
 
-var fetchTracks = function(albumId, callback) {
- $.ajax({
-   url: 'https://api.spotify.com/v1/albums/' + albumId,
-   success: function(response) {
-     callback(response);
-   }
- });
-};
 
 var searchArtists = function(query) {
  $.ajax({
@@ -50,7 +56,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQCjy4MW9zK9O6nkIxp5y0n2XSV5dwxAs94joiIAD7i0xQZeHJ7O5Nn8-TkaWXL3re8m0jJWF8NWKNb6OZJLUp2Lvv0mirH3JnIbs_40Cny5V3VuNCc8fCBvvo5IniADV9SmHrLw-y7PNuhQLvwf3sA"
+       "Authorization": "Bearer " + "BQCaVBujB27gIqjIuB5eg5km97GxLMcSJ18zyWKuccNgwURBv3JNol1abkEslWlSHkUmvbOvRjUkfUVvWt0BX0AhJ6ZZtVRfQ22ubAYfdY7fR0NrQcpZpdUxgGINs_U5jObytoSbYQMRAY0UgQoKaHw"
    },
    success: function(response) {
        tempPic = response.artists.items[0].images[0].url;
@@ -69,7 +75,7 @@ var getTopTracks = function(id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQCjy4MW9zK9O6nkIxp5y0n2XSV5dwxAs94joiIAD7i0xQZeHJ7O5Nn8-TkaWXL3re8m0jJWF8NWKNb6OZJLUp2Lvv0mirH3JnIbs_40Cny5V3VuNCc8fCBvvo5IniADV9SmHrLw-y7PNuhQLvwf3sA"
+         "Authorization": "Bearer " + "BQCaVBujB27gIqjIuB5eg5km97GxLMcSJ18zyWKuccNgwURBv3JNol1abkEslWlSHkUmvbOvRjUkfUVvWt0BX0AhJ6ZZtVRfQ22ubAYfdY7fR0NrQcpZpdUxgGINs_U5jObytoSbYQMRAY0UgQoKaHw"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -82,6 +88,7 @@ var getTopTracks = function(id) {
          trackEight.innerHTML = response.tracks[7].name;
          trackNine.innerHTML = response.tracks[8].name;
          trackTen.innerHTML = response.tracks[9].name;
+         getLyrics(response.tracks[0].name);
        console.log(response);
      }
    });
@@ -89,9 +96,11 @@ var getTopTracks = function(id) {
 
  var getLyrics = function(arg){
      $.ajax({
-         url: 'https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_track=' + arg + '&quorum_factor=1&apikey=0d49953ffed1270bd1dd131b139e95d1',
+         url: 'https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_track=' + arg + '&quorum_factor=1&page_size=1&apikey=0d49953ffed1270bd1dd131b139e95d1',
          success: function(response) {
              console.log(response);
+             
+            //getRealLyrics(response.)
          }
      })
  }
@@ -102,7 +111,6 @@ var getTopTracks = function(id) {
  console.log('success!')
  searchArtists(document.getElementById('searchbox').value);
  getMusicVideos(document.getElementById('searchbox').value);
- getLyrics(document.getElementById('trackOne').textContent);
 }, false);
 
 
