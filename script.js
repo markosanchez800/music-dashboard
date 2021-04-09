@@ -64,8 +64,9 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQC01nKU7tu29QVz6rv5fK8JkymwJmfz1hjrBa1C0jSpL9qTA5W9QzVvCiRHUN1H0KgPdFYAHvSWhNXiDXi9RNNnob7uMh1JxCS08uph7oEM2GP9NNeNCXhkUc-C_4AO6sbxgNpIEoDeDLJy-hjPkNQ"
+       "Authorization": "Bearer " + "BQBXpJ1qL5buZwR97yapox-QYobB99w7gwYKsZRs0OrILC1AiaqJ38kHcNPVrmV-TM8VbVcuHxTzimPBpjhayD5gizBkgpPdiutoiYlBXr7PPmPiG_WVoKucI_vNEXAtJ2NZIncZn9imzk0j6P7W78c"
    },
+   
    success: function(response) {
        tempPic = response.artists.items[0].images[0].url;
        artistInfo.setAttribute("style","background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(255,0,0,0)), url(" + tempPic + ")");
@@ -73,7 +74,6 @@ var searchArtists = function(query) {
        monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
        id = response.artists.items[0].id;
        getTopTracks(query,id);
-       
      console.log(response);
    }
  });
@@ -84,7 +84,7 @@ var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQC01nKU7tu29QVz6rv5fK8JkymwJmfz1hjrBa1C0jSpL9qTA5W9QzVvCiRHUN1H0KgPdFYAHvSWhNXiDXi9RNNnob7uMh1JxCS08uph7oEM2GP9NNeNCXhkUc-C_4AO6sbxgNpIEoDeDLJy-hjPkNQ"
+         "Authorization": "Bearer " + "BQBXpJ1qL5buZwR97yapox-QYobB99w7gwYKsZRs0OrILC1AiaqJ38kHcNPVrmV-TM8VbVcuHxTzimPBpjhayD5gizBkgpPdiutoiYlBXr7PPmPiG_WVoKucI_vNEXAtJ2NZIncZn9imzk0j6P7W78c"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -152,6 +152,9 @@ var getTopTracks = function(query,id) {
  searchHistory(document.getElementById('searchbox').value);
 }, false);
 
+document.getElementById('search-form').addEventListener('submit', function(e) {
+  searchHistory();
+})
 
 //var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
 var maxResults = 10;
@@ -188,17 +191,15 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
 }
 
 
-function searchHistory (query) {
+function searchHistory() {
     //artists.push(artistName);
     //localStorage.setItem("artists", JSON.stringify(artists) );
     artistButton = document.createElement("button");
     artistButton.setAttribute("style","width:100px");
-    artistButton.innerHTML = query;
+    artistButton.innerHTML = artistName.innerHTML;
      artistButton.onclick = function(){
-        $('#artistInfo').empty();
-        $('#musicVideos').empty();
-        searchArtists(artistButton.textContent);
-        getMusicVideos(artistButton.textContent);
+        searchArtists(target.textContent);
+        getMusicVideos(target.textContent);
     }
 
     searchArea.appendChild(artistButton);
