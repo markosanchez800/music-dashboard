@@ -64,7 +64,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQBXpJ1qL5buZwR97yapox-QYobB99w7gwYKsZRs0OrILC1AiaqJ38kHcNPVrmV-TM8VbVcuHxTzimPBpjhayD5gizBkgpPdiutoiYlBXr7PPmPiG_WVoKucI_vNEXAtJ2NZIncZn9imzk0j6P7W78c"
+       "Authorization": "Bearer " + "BQB9ZIdA4MhT7uvNNv2HFUfCrPqI0hnjYbPYImx1W864vsRB2c7PDH9xjtDbaiUTS-bCeP-2ZWcosgXAt-o7RIa2cfGNKlzHCx6knRnAaWe0RyDuJyKHkgESLW3Vv7xc9Dmz5FvPMMxK6ufhjkxZmR8"
    },
    
    success: function(response) {
@@ -84,7 +84,7 @@ var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQBXpJ1qL5buZwR97yapox-QYobB99w7gwYKsZRs0OrILC1AiaqJ38kHcNPVrmV-TM8VbVcuHxTzimPBpjhayD5gizBkgpPdiutoiYlBXr7PPmPiG_WVoKucI_vNEXAtJ2NZIncZn9imzk0j6P7W78c"
+         "Authorization": "Bearer " + "BQB9ZIdA4MhT7uvNNv2HFUfCrPqI0hnjYbPYImx1W864vsRB2c7PDH9xjtDbaiUTS-bCeP-2ZWcosgXAt-o7RIa2cfGNKlzHCx6knRnAaWe0RyDuJyKHkgESLW3Vv7xc9Dmz5FvPMMxK6ufhjkxZmR8"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -156,7 +156,7 @@ document.getElementById('search-form').addEventListener('submit', function(e) {
   searchHistory();
 })
 
-//var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
+var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
 var maxResults = 10;
 var searchQuery = document.getElementById("searchbox")
 var video = ""
@@ -182,7 +182,7 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
                 musicVideos.appendChild(video);
             
             }
-               // addVideo();
+                addVideo();
         }
                 
 

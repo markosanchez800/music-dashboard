@@ -89,3 +89,9 @@ li {
     color: white;
     cursor: pointer;
 }
+
+#logo{
+    margin-top:10px;
+    height:70px;
+    width:70px;
+}
