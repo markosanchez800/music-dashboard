@@ -56,7 +56,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQDujktfWY-0wPK9y8Pl_HpxffQWOYr53dq0nCHuSywJiLKjeGS-ChSa-pFnb4-AIjDmcHOrZf09mFttqEC-PHRf2WBBDkKy2RcKcqH2IxrtemS-LPxOx-SdWNlasQYTNqctYUncDmewAg2KzCGLbTI"
+       "Authorization": "Bearer " + "BQC6wZf3OTPanpreZ0o7xiYkHEATe34i4krQetGZYpAf5TNZtsA7ld6r0i8omch1ku9PA_-PCTmfzmhqH0OQeGOe4QQCwgmLu0_ZJBAqQcdNyTHfjKMh-BLJwtSUky5SBJDIo0SMb9lzTLXAAm04SYU"
     },
    success: function(response) {
        tempPic = response.artists.items[0].images[0].url;
@@ -75,7 +75,7 @@ var getTopTracks = function(id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQDujktfWY-0wPK9y8Pl_HpxffQWOYr53dq0nCHuSywJiLKjeGS-ChSa-pFnb4-AIjDmcHOrZf09mFttqEC-PHRf2WBBDkKy2RcKcqH2IxrtemS-LPxOx-SdWNlasQYTNqctYUncDmewAg2KzCGLbTI"
+         "Authorization": "Bearer " + "BQC6wZf3OTPanpreZ0o7xiYkHEATe34i4krQetGZYpAf5TNZtsA7ld6r0i8omch1ku9PA_-PCTmfzmhqH0OQeGOe4QQCwgmLu0_ZJBAqQcdNyTHfjKMh-BLJwtSUky5SBJDIo0SMb9lzTLXAAm04SYU         "
     },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -89,6 +89,7 @@ var getTopTracks = function(id) {
          trackNine.innerHTML = response.tracks[8].name;
          trackTen.innerHTML = response.tracks[9].name;
          getLyrics(response.tracks[0].name);
+         searchLyrics(response.tracks[0].name);
        console.log(response);
      }
    });
@@ -104,19 +105,16 @@ var getTopTracks = function(id) {
          }
      })
  }
- http://api.musixmatch.com/ws/1.1/track.search?q_artist=justin bieber&page_size=3&page=1&s_track_rating=desc
 
  var searchLyrics = function(arg){
     $.ajax({
-        url: 'https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=15105534' + arg + '&quorum_factor=1&page_size=1&apikey=0d49953ffed1270bd1dd131b139e95d1',
+        url:'http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=',
         success: function(response) {
             console.log(response);
             
-           //getRealLyrics(response.)
         }
     })
 }
-
 
 
  document.getElementById('search-form').addEventListener('submit', function(e) {
@@ -160,34 +158,4 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
   });
 
 }
-
-
-// musix key 0d49953ffed1270bd1dd131b139e95d1
-
-
-
-
-
-
-// musix key 0d49953ffed1270bd1dd131b139e95d1
-
-
-function getAPI(){
-    musixmatchlyrics = 'https://api.musixmatch.com/ws/v1.1/track.lyrics.get?apikey=0d49953ffed1270bd1dd131b139e95d1';
-    fetch(musixmatchlyrics)
-        .then(function(response) {
-            console.log(response);
-            return response.json();
-        })
-        }
-       
-function getLyrics(){
-    musixmatchsearch = 'https://api.musixmatch.com/ws/v1.1/track.search?apikey=0d49953ffed1270bd1dd131b139e95d1';
-    fetch(musixmatchsearch)
-        .then(function(response) {
-            console.log(response);
-            return response.json();
-        })
-        
-    }
 
