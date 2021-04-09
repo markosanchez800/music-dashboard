@@ -100,13 +100,33 @@ var getTopTracks = function(query,id) {
           getLyrics(query,response.tracks[2].name);
           })
          trackFour.innerHTML = response.tracks[3].name;
+         trackFour.addEventListener("click", function(){
+          getLyrics(query,response.tracks[3].name);
+          })
          trackFive.innerHTML = response.tracks[4].name;
+         trackFive.addEventListener("click", function(){
+          getLyrics(query,response.tracks[4].name);
+          })
          trackSix.innerHTML = response.tracks[5].name;
+         trackSix.addEventListener("click", function(){
+          getLyrics(query,response.tracks[5].name);
+          })
          trackSeven.innerHTML = response.tracks[6].name;
+         trackSeven.addEventListener("click", function(){
+          getLyrics(query,response.tracks[6].name);
+          })
          trackEight.innerHTML = response.tracks[7].name;
+         trackEight.addEventListener("click", function(){
+          getLyrics(query,response.tracks[7].name);
+          })
          trackNine.innerHTML = response.tracks[8].name;
+         trackNine.addEventListener("click", function(){
+          getLyrics(query,response.tracks[8].name);
+          })
          trackTen.innerHTML = response.tracks[9].name;
-         
+         trackTen.addEventListener("click", function(){
+          getLyrics(query,response.tracks[9].name);
+          })
        console.log(response);
      }
    });
