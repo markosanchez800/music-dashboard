@@ -1,16 +1,17 @@
 artistName = document.getElementById('artistname'),
-monthlyListen = document.getElementById('monthlyNumber')
-artistInfo = document.getElementById('artistInfo')
-trackOne = document.getElementById('trackOne')
-trackTwo = document.getElementById('trackTwo')
-trackThree = document.getElementById('trackThree')
-trackFour = document.getElementById('trackFour')
-trackFive = document.getElementById('trackFive')
-trackSix = document.getElementById('trackSix')
-trackSeven = document.getElementById('trackSeven')
-trackEight = document.getElementById('trackEight')
-trackNine = document.getElementById('trackNine')
-trackTen = document.getElementById('trackTen')
+monthlyListen = document.getElementById('monthlyNumber'),
+artistInfo = document.getElementById('artistInfo'),
+trackOne = document.getElementById('trackOne'),
+trackTwo = document.getElementById('trackTwo'),
+trackThree = document.getElementById('trackThree'),
+trackFour = document.getElementById('trackFour'),
+trackFive = document.getElementById('trackFive'),
+trackSix = document.getElementById('trackSix'),
+trackSeven = document.getElementById('trackSeven'),
+trackEight = document.getElementById('trackEight'),
+trackNine = document.getElementById('trackNine'),
+trackTen = document.getElementById('trackTen'),
+searchButton = document.getElementById('request')
  
   clientID = '9577ec53580a46c686cbb0729d57118e';
   clientSecret = '903925af8da34bbabffe55187620ca4b';
@@ -56,7 +57,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQCaVBujB27gIqjIuB5eg5km97GxLMcSJ18zyWKuccNgwURBv3JNol1abkEslWlSHkUmvbOvRjUkfUVvWt0BX0AhJ6ZZtVRfQ22ubAYfdY7fR0NrQcpZpdUxgGINs_U5jObytoSbYQMRAY0UgQoKaHw"
+       "Authorization": "Bearer " + "BQDujktfWY-0wPK9y8Pl_HpxffQWOYr53dq0nCHuSywJiLKjeGS-ChSa-pFnb4-AIjDmcHOrZf09mFttqEC-PHRf2WBBDkKy2RcKcqH2IxrtemS-LPxOx-SdWNlasQYTNqctYUncDmewAg2KzCGLbTI"
    },
    success: function(response) {
        tempPic = response.artists.items[0].images[0].url;
@@ -65,6 +66,7 @@ var searchArtists = function(query) {
        monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
        id = response.artists.items[0].id;
        getTopTracks(id);
+       searchHistory(query);
      console.log(response);
    }
  });
@@ -75,7 +77,7 @@ var getTopTracks = function(id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQCaVBujB27gIqjIuB5eg5km97GxLMcSJ18zyWKuccNgwURBv3JNol1abkEslWlSHkUmvbOvRjUkfUVvWt0BX0AhJ6ZZtVRfQ22ubAYfdY7fR0NrQcpZpdUxgGINs_U5jObytoSbYQMRAY0UgQoKaHw"
+         "Authorization": "Bearer " + "BQDujktfWY-0wPK9y8Pl_HpxffQWOYr53dq0nCHuSywJiLKjeGS-ChSa-pFnb4-AIjDmcHOrZf09mFttqEC-PHRf2WBBDkKy2RcKcqH2IxrtemS-LPxOx-SdWNlasQYTNqctYUncDmewAg2KzCGLbTI"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -149,7 +151,17 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
 }
 
 
-// musix key 0d49953ffed1270bd1dd131b139e95d1
+var searchHistory = function(query){
+    var artistButton = document.createElement("button");
+    artistButton.innerHTML = query;
+    artistButton.onclick = function(){
+        $('#artistInfo').empty();
+        $('#musicVideos').empty();
+        searchArtists(artistButton.textContent);
+        getMusicVideos(artistButton.textContent);
+    }
+    searchButton.appendChild(artistButton);
+}
 
 
 
