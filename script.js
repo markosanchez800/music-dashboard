@@ -124,6 +124,10 @@ var getTopTracks = function(query,id) {
    });
  };
 
+//What: this function is retreiving data on each artist's lyrics in the database.
+//How: using a function called getlyrics to pull lyrics from lyrics.ovh and console logging it out for a response.
+//Why: in order to have the lyrics on the page for user's to view the lyrics for each song
+
 
  var getLyrics = function(query,arg){
     $.ajax({
@@ -133,7 +137,7 @@ var getTopTracks = function(query,id) {
             lyricStuff = response.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
             lyricBox.innerHTML=lyricStuff;
 
-           //getRealLyrics(response.)
+           
         }
     })
 }
