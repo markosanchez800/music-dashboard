@@ -11,7 +11,7 @@ trackSeven = document.getElementById('trackSeven'),
 trackEight = document.getElementById('trackEight'),
 trackNine = document.getElementById('trackNine'),
 trackTen = document.getElementById('trackTen'),
-searchButton = document.getElementById('request')
+searchArea = document.getElementById('searchHistoree')
  
   clientID = '9577ec53580a46c686cbb0729d57118e';
   clientSecret = '903925af8da34bbabffe55187620ca4b';
@@ -160,7 +160,7 @@ var searchHistory = function(query){
         searchArtists(artistButton.textContent);
         getMusicVideos(artistButton.textContent);
     }
-    searchButton.appendChild(artistButton);
+    searchArea.appendChild(artistButton);
 }
 
 
