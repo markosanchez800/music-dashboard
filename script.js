@@ -71,6 +71,7 @@ var searchArtists = function(query) {
  });
  
 };
+//What: this function is pulling the top tracks from every artist
 
 var getTopTracks = function(query,id) {
    $.ajax({
