@@ -3,13 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/grids-responsive-min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Music Dasboard</title>
 </head>
 <body>
+    <div class="pure-g">
+        <div class="pure-u-lg-1 pure-u-md-1 pure-u-sm-1 jumbotron"><h1>MUSIC DASHBOARD</h1></div>
+    
+    </div>
+        
+        
+        <div class="pure-g">
+        <div class="pure-u-sm-1 pure-u-md-1-5 pure-u-lg-1-5 searchbar">
+            <h2>&nbsp;SEARCH</h2>
+            <form id= "search-form" class="pure-form pure-form-aligned">
+                <input type="artist" id="searchbox" class="pure-input-rounded pure-input-2-3"placeholder="Artist Name" required=""><br><br>
+                <button type="submit" id="request" class="pure-button pure-button-black">Search</button>
+            </form></div>
+        <div id="artistInfo" class="pure-u-sm-1 pure-u-md-3-4 pure-u-lg-3-4 artistinfo">
+            <h1 id="artistname"></h1>
+        <p id="monthlylisteners">Followers: <br></p>
+        <p id="monthlyNumber"></p>
+        </div></div>
+        <div class="pure-g">
+            <div class="pure-u-sm-1 pure-u-md-1-5 pure-u-lg-1-5 placeholder">          <p>   _</p></div>
+            <div class="pure-u-sm-1 pure-u-md-3-4 pure-u-lg-3-4 toptracks">
+                <h1 id="toptracks">TOP TRACKS</h1> 
+                <ul>
+                <li id="trackOne"></li>
+                <li id="trackTwo"></li>    
+                <li id="trackThree"></li>    
+                <li id="trackFour"></li>    
+                <li id="trackFive"></li>    
+                <li id="trackSix"></li>    
+                <li id="trackSeven"></li>    
+                <li id="trackEight"></li>    
+                <li id="trackNine"></li>    
+                <li id="trackTen"></li>    
+                </ul>
+            </div>
+               
 
-    <script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"></script>
-    <script type="text/javascript" src="script.js"></script>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-sm-1 pure-u-md-1-5 pure-u-lg-1-5 placeholder">          <p>   _</p></div>
+            <div class="pure-u-sm-1 pure-u-md-3-4 pure-u-lg-3-4 musicvideos">
+                <h1 id="musicvideosheader">MUSIC VIDEOS</h1>
+            <div id="musicvideos"></div>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-sm-1 pure-u-md-1-5 pure-u-lg-1-5 placeholder">          <p>   _</p></div>
+            <div class="pure-u-sm-1 pure-u-md-3-4 pure-u-lg-3-4">
+                <h1 id="lyricsheader">LYRICS</h1>
+
+                <h4 id ="lyrictitle">Ice Cream</h4>
+                <p id ="lyrics">
+                    Come a little closer 'cause you looking thirsty<br>
+                    I'ma make it better, sip it like a Slurpee<br>
+                    Snow cone chilly<br>
+                    Get it free like Willy<br>
+                    In the jeans like Billie<br>
+                    You be poppin' like a wheelie<br>
+                    Even in the sun, you know I keep it icy<br>
+                    You could take a lick but it's too cold to bite me<br>
+                    Brr, brr, frozen<br>
+                    You're the one been chosen<br>
+                    Play the part like Moses<br>
+                    Keep it fresh like roses (oh)<br>
+                    Look so good yeah, look so sweet (hey)<br>
+                    Lookin' good enough to eat<br>
+                    Coldest with the kiss, so he call me ice cream<br>
+                    Catch me in the fridge, right where the ice be<br>
+                    Look so good yeah, look so sweet (hey)<br>
+                    Baby, you deserve a treat<br>
+                    Diamonds on my wrist, so he call me ice cream<br>
+                    You can double dip 'cause I know you like me<br>
+                    Ice cream, chillin', chillin'<br>
+                    Ice cream, chillin'<br>
+                    Ice cream, chillin', chillin'<br>
+                    Ice cream, chillin'<br>
+                    I know that my heart can be so cold<br>
+                    But I'm sweet for you, come put me in a cone<br>
+                    You're the only touch, yeah, that get me meltin'<br>
+                    He's my favorite flavor, always gonna pick him<br>
+                    You're the cherry piece, just stay on top of me, so<br>
+                    I can't see nobody else for me, no<br>
+                    Get it, flip it, scoop it<br>
+                    Do it like that, ah yeah ah yeah<br>
+                    Like it, love it, lick it<br>
+                    Do it like la la la, oh yeah<br>
+                    Look so good, yeah, look so sweet (hey)<br>
+                    Lookin' good enough to eat<br>
+                    Coldest with the kiss, so he call me ice cream<br>
+                    Catch me in the fridge, right where the ice be<br>
+                    Look so good, yeah, look so sweet (hey)<br>
+                    Baby, you deserve a treat<br>
+                    Diamonds on my wrist, so he call me ice cream<br>
+                    You can double dip 'cause I know you like me<br>
+                    Ice cream, chillin', chillin'<br>
+                    Ice cream, chillin'<br>
+                    Ice cream, chillin', chillin'<br>
+                    Ice cream, chillin'<br>
+                    Ice cream, chillin', chillin'<br>
+                    Ice cream, chillin'<br>
+                    Ice cream, chillin', chillin'<br>
+                    Ice cream<br>
+                    Chillin' like a villain, yeah, ra ra ra<br>
+                    미친 미친듯한 속도 in my La Ferra'<br>
+                    너무 빨러 너는 삐끗<br>
+                    원한다면 그냥 지름<br>
+                    Millis, billis 매일 벌음<br>
+                    한여름 손목에 얼음<br>
+                    Keep it movin' like my lease up<br>
+                    Think you fly, boy, where your visa?<br>
+                    Mona Lisa kinda Lisa<br>
+                    Needs an ice cream man that treats her<br>
+                    Keep it movin' like my lease up<br>
+                    Think you fly, boy, where your visa?<br>
+                    Mona Lisa kinda Lisa<br>
+                    Needs an ice cream man that treats her (hey)<br>
+                    Na na na na na<br>
+                    Na na na na na (hey)<br>
+                    Ice on my wrist, yeah, I like it like this<br>
+                    Get the bag with the cream<br>
+                    If you know what I mean<br>
+                    Ice cream, ice cream<br>
+                    Ice cream, chillin'<br>
+                    Na na na na na<br>
+                    Na na na na na (hey)<br>
+                    Ice on my wrist, yeah, I like it like this<br>
+                    And I'm nice with the cream<br>
+                    If you know what I mean<br>
+                    Ice cream, ice cream<br>
+                    Ice cream</p></div>
+
+        </div>
+
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script> 
+<script src="script.js"></script>
 
 </body>
 </html>
