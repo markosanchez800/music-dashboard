@@ -88,8 +88,17 @@ var getTopTracks = function(query,id) {
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
+         trackOne.addEventListener("click", function(){
+         getLyrics(query,response.tracks[0].name);
+         })
          trackTwo.innerHTML = response.tracks[1].name;
+         trackTwo.addEventListener("click", function(){
+          getLyrics(query,response.tracks[1].name);
+          })
          trackThree.innerHTML = response.tracks[2].name;
+         trackThree.addEventListener("click", function(){
+          getLyrics(query,response.tracks[2].name);
+          })
          trackFour.innerHTML = response.tracks[3].name;
          trackFive.innerHTML = response.tracks[4].name;
          trackSix.innerHTML = response.tracks[5].name;
@@ -97,7 +106,7 @@ var getTopTracks = function(query,id) {
          trackEight.innerHTML = response.tracks[7].name;
          trackNine.innerHTML = response.tracks[8].name;
          trackTen.innerHTML = response.tracks[9].name;
-         getLyrics(query,response.tracks[0].name);
+         
        console.log(response);
      }
    });
@@ -174,7 +183,6 @@ function searchHistory (query) {
 
     searchArea.appendChild(artistButton);
 }
-
 
 
 
