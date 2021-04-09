@@ -66,7 +66,7 @@ var searchArtists = function(query) {
        monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
        id = response.artists.items[0].id;
        getTopTracks(id);
-       searchHistory(query);
+       
      console.log(response);
    }
  });
@@ -113,10 +113,11 @@ var getTopTracks = function(id) {
  console.log('success!')
  searchArtists(document.getElementById('searchbox').value);
  getMusicVideos(document.getElementById('searchbox').value);
+ searchHistory(document.getElementById('searchbox').value);
 }, false);
 
 
-var apiKey= "AIzaSyADNoOQ9XzgB7BUXeHVLhgIFbXlbjVRq5c";
+//var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
 var maxResults = 10;
 var searchQuery = document.getElementById("searchbox")
 var video = ""
@@ -153,17 +154,17 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
 
 var searchHistory = function(query){
     artistButton = document.createElement("button");
-    artistButton.setAttribute("style","length:100px")
+    artistButton.setAttribute("style","width:100px");
     artistButton.innerHTML = query;
-    artistButton.onclick = function(){
+     artistButton.onclick = function(){
         $('#artistInfo').empty();
         $('#musicVideos').empty();
-        searchArtists(artistButton.textContent);
-        getMusicVideos(artistButton.textContent);
+        searchArtists(query);
+        getMusicVideos(query);
     }
+
     searchArea.appendChild(artistButton);
 }
-
 
 
 
