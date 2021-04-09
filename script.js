@@ -71,8 +71,9 @@ var searchArtists = function(query) {
  });
  
 };
-//What: this function is pulling the top tracks from every artist
-
+//What: this function is pulling the top tracks from every artist and making their lyrics acessible to the user
+//How: By inputting function, pulling data from spotify api, inputting lines for tracks to appear, and adding event listener function to make them clickable.
+//Why: in order to be able to see the top tracks and select the lyrics from each of the top tracks 
 var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
