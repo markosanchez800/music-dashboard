@@ -57,7 +57,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQDujktfWY-0wPK9y8Pl_HpxffQWOYr53dq0nCHuSywJiLKjeGS-ChSa-pFnb4-AIjDmcHOrZf09mFttqEC-PHRf2WBBDkKy2RcKcqH2IxrtemS-LPxOx-SdWNlasQYTNqctYUncDmewAg2KzCGLbTI"
+       "Authorization": "Bearer " + "BQBiHJENfF7PhHoonD_vwWL8AG7LSgLYwYL6FJRgJg30TQJqNtUixMUQkMAJ66mwZ6QeZlKIosH8h9Y7mx0kGwIXgSJVB34GmAvfqF3BD2JJR2ACuNA6wUO6pHBVWzHwEu182M1hJssS2VSCeogz1zg"
    },
    success: function(response) {
        tempPic = response.artists.items[0].images[0].url;
@@ -77,7 +77,7 @@ var getTopTracks = function(id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQDujktfWY-0wPK9y8Pl_HpxffQWOYr53dq0nCHuSywJiLKjeGS-ChSa-pFnb4-AIjDmcHOrZf09mFttqEC-PHRf2WBBDkKy2RcKcqH2IxrtemS-LPxOx-SdWNlasQYTNqctYUncDmewAg2KzCGLbTI"
+         "Authorization": "Bearer " + "BQBiHJENfF7PhHoonD_vwWL8AG7LSgLYwYL6FJRgJg30TQJqNtUixMUQkMAJ66mwZ6QeZlKIosH8h9Y7mx0kGwIXgSJVB34GmAvfqF3BD2JJR2ACuNA6wUO6pHBVWzHwEu182M1hJssS2VSCeogz1zg"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -152,7 +152,8 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
 
 
 var searchHistory = function(query){
-    var artistButton = document.createElement("button");
+    artistButton = document.createElement("button");
+    artistButton.setAttribute("style","length:100px")
     artistButton.innerHTML = query;
     artistButton.onclick = function(){
         $('#artistInfo').empty();
