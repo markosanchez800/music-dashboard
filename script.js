@@ -65,7 +65,7 @@ var searchArtists = function(query) {
        artistName.innerHTML = JSON.stringify(response.artists.items[0].name);
        monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
        id = response.artists.items[0].id;
-       getTopTracks(id);
+       getTopTracks(query,id);
      console.log(response);
    }
  });
