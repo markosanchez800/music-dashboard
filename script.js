@@ -11,7 +11,7 @@ trackSeven = document.getElementById('trackSeven')
 trackEight = document.getElementById('trackEight')
 trackNine = document.getElementById('trackNine')
 trackTen = document.getElementById('trackTen')
-lyricbox = document.getElementById('lyrics')
+lyricBox = document.getElementById('lyrics')
  
   clientID = '9577ec53580a46c686cbb0729d57118e';
   clientSecret = '903925af8da34bbabffe55187620ca4b';
@@ -72,7 +72,7 @@ var searchArtists = function(query) {
  
 };
 
-var getTopTracks = function(id) {
+var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
@@ -89,7 +89,7 @@ var getTopTracks = function(id) {
          trackEight.innerHTML = response.tracks[7].name;
          trackNine.innerHTML = response.tracks[8].name;
          trackTen.innerHTML = response.tracks[9].name;
-         getLyrics(response.tracks[0].name);
+         getLyrics(query,response.tracks[0].name);
        console.log(response);
      }
    });
@@ -102,7 +102,7 @@ var getTopTracks = function(id) {
         success: function(response) {
             console.log(response);
             lyricStuff = response.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
-            lyricBOx.innerHTML=lyricStuff;
+            lyricBox.innerHTML=lyricStuff;
 
            //getRealLyrics(response.)
         }
