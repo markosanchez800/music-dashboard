@@ -109,7 +109,8 @@ var getTopTracks = function(query,id) {
          url: "https://api.lyrics.ovh/v1/" + query + "/" + arg,
          success: function(response) {
              console.log(response);
-             lyricBox.innerHTML = response.lyrics;
+             lyricStuff = response.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+             lyricBox.innerHTML = lyricStuff;
 
              
             //getRealLyrics(response.)
