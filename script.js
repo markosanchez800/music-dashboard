@@ -149,7 +149,7 @@ var getTopTracks = function(query,id) {
  console.log('success!')
  searchArtists(document.getElementById('searchbox').value);
  getMusicVideos(document.getElementById('searchbox').value);
- searchHistory(document.getElementById('searchbox').value);
+ //searchHistory(document.getElementById('searchbox').value);
 }, false);
 
 document.getElementById('search-form').addEventListener('submit', function(e) {
@@ -190,21 +190,30 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
 
 }
 
-
+/*
 function searchHistory() {
     //artists.push(artistName);
     //localStorage.setItem("artists", JSON.stringify(artists) );
-    artistButton = document.createElement("button");
-    artistButton.setAttribute("style","width:100px");
-    artistButton.innerHTML = artistName.innerHTML;
-     artistButton.onclick = function(){
+    button = document.createElement("button");
+    button.setAttribute("style","width:100px");
+    button.innerHTML = artistName.value;
+    document.querySelectorAll('button')
+    .forEach(button => {
+      button.addEventListener('click', function() {
         searchArtists(target.textContent);
         getMusicVideos(target.textContent);
-    }
+      });
+    });
+   
+   
+    // button.onclick = function(){
+    //    searchArtists(target.textContent);
+    //    getMusicVideos(target.textContent);
+   // }
 
-    searchArea.appendChild(artistButton);
+    searchArea.appendChild(button);
 }
 
 
-
+*/
 
