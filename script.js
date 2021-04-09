@@ -79,18 +79,47 @@ var getTopTracks = function(query,id) {
          "Authorization": "Bearer " + "BQDgUPMud17zaKRxgYQvvk84xBNBtxbJnpUOQJ_B_6NZxSXq-_EgHDHXiCCfh6itJPsMfnZ4-VN4BLffvgV3NGtqqvXZtbaOM8BKPd3eFHNeLpQjBEhI3KhJBlbMgS_s03-MIbwWRRdmzrcx9E9eB8I "
     },
      success: function(response) {
-         trackOne.innerHTML = response.tracks[0].name;
-         trackTwo.innerHTML = response.tracks[1].name;
-         trackThree.innerHTML = response.tracks[2].name;
-         trackFour.innerHTML = response.tracks[3].name;
-         trackFive.innerHTML = response.tracks[4].name;
-         trackSix.innerHTML = response.tracks[5].name;
-         trackSeven.innerHTML = response.tracks[6].name;
-         trackEight.innerHTML = response.tracks[7].name;
-         trackNine.innerHTML = response.tracks[8].name;
-         trackTen.innerHTML = response.tracks[9].name;
-         getLyrics(query,response.tracks[0].name);
-       console.log(response);
+      trackOne.innerHTML = response.tracks[0].name;
+      trackOne.addEventListener("click", function(){
+      getLyrics(query,response.tracks[0].name);
+      })
+      trackTwo.innerHTML = response.tracks[1].name;
+      trackTwo.addEventListener("click", function(){
+       getLyrics(query,response.tracks[1].name);
+       })
+      trackThree.innerHTML = response.tracks[2].name;
+      trackThree.addEventListener("click", function(){
+       getLyrics(query,response.tracks[2].name);
+       })
+      trackFour.innerHTML = response.tracks[3].name;
+      trackFour.addEventListener("click", function(){
+       getLyrics(query,response.tracks[3].name);
+       })
+      trackFive.innerHTML = response.tracks[4].name;
+      trackFive.addEventListener("click", function(){
+       getLyrics(query,response.tracks[4].name);
+       })
+      trackSix.innerHTML = response.tracks[5].name;
+      trackSix.addEventListener("click", function(){
+       getLyrics(query,response.tracks[5].name);
+       })
+      trackSeven.innerHTML = response.tracks[6].name;
+      trackSeven.addEventListener("click", function(){
+       getLyrics(query,response.tracks[6].name);
+       })
+      trackEight.innerHTML = response.tracks[7].name;
+      trackEight.addEventListener("click", function(){
+       getLyrics(query,response.tracks[7].name);
+       })
+      trackNine.innerHTML = response.tracks[8].name;
+      trackNine.addEventListener("click", function(){
+       getLyrics(query,response.tracks[8].name);
+       })
+      trackTen.innerHTML = response.tracks[9].name;
+      trackTen.addEventListener("click", function(){
+       getLyrics(query,response.tracks[9].name);
+       })
+    console.log(response);
      }
    });
  };
