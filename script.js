@@ -292,7 +292,7 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
                 var video = document.createElement("iframe");
                 video.setAttribute("width","210");
                 video.setAttribute("height", "158");
-                video.setAttribute("src","http://www.youtube.com/embed/"+vidID)
+                video.setAttribute("src","https://www.youtube.com/embed/"+vidID)
                 musicVideos.appendChild(video);
             
             }
