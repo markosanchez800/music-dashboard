@@ -20,4 +20,14 @@ When the user types in the artist name, the app will pull the artists spotify im
 Music-Dashboard contains the accessibilities for music like Spotify, the music video capabilities like youtube, and a lyric generating resource like genius all in one place. You can type in an artist, discover their popular songs, watch their music videos, and sing along to their lyrics if you wanted to, all without leaving one page!
 
 ## Code Snippet
-![snippet-of-code](https://github.com/markosanchez800/music-dashboard/blob/Jamiesbranch/Screenshots/Screenshot%20for%20Readme.gif)
+![snippet-of-code](https://github.com/markosanchez800/music-dashboard/blob/Jamiesbranch/Screenshots/Code%20Snippet%20GIf.gif)
+
+### Credits
+[Github](https://github.com/pattymcpat "Patrick Ly")
+[Github](https://github.com/markosanchez800 "Marko Sanchez")
+[Github](https://github.com/Forresterjamie01 "Jamie Forrester")
+
+
+[![Javascript badge](https://img.shields.io/badge/Javascript-Used-blue)](https://shields.io/)
+[![HTML badge](https://img.shields.io/badge/HTML-Used-yellow)](https://shields.io/)
+[![CSS badge](https://img.shields.io/badge/CSS-Used-red)](https://shields.io/)
