@@ -13,6 +13,9 @@ trackNine = document.getElementById('trackNine'),
 trackTen = document.getElementById('trackTen'),
 searchArea = document.getElementById('searchHistoree'),
 lyricBox = document.getElementById('lyrics')
+var redirect_uri = "https://markosanchez800.github.io/music-dashboard/index.html"
+var AUTHORIZE = "https://accounts.spotify.com/authorize"
+
 var artists;
 var searchHistory = localStorage.getItem("artists");
 if(searchHistory === null){
@@ -44,8 +47,80 @@ function createButtons(){
   }
           }
  
-  clientID = '9577ec53580a46c686cbb0729d57118e';
-  clientSecret = '903925af8da34bbabffe55187620ca4b';
+  clientID = '6bdb7686b8a94fa48e6e7aa60d7c4c72';
+  clientSecret = 'cbc3d5f4c71143278b1bc315f060fb0c';
+  
+function requestAuthorization(){
+var url = AUTHORIZE; 
+url +="?client_id="+clientID;
+url +="&response_type=code";
+url +="&redirect_uri="+encodeURI(redirect_uri);
+url +="&show_dialog=true";
+window.location.href = url;
+
+  }
+
+function onPageLoad(){
+  if ( window.location.search.length > 0){
+    handleRedirect();
+  }
+}
+function handleRedirect(){
+  let code = getCode();
+  fetchAccessToken( code );
+}
+
+function fetchAccessToken ( code ){
+  var body = "grant_type=authorization_code"; 
+  body += "$code="+code;
+  body += "&redirect_uri="+encodeURI(redirect_uri);
+  body += "&client_id="+clientID;
+  body += "&client_secret="+clientSecret;
+  callAuthorizationApi(body);
+}
+
+function callAuthorizationApi(body){
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", TOKEN, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('Authorization', 'Basic '+btoa(clientID + ':' + clientSecret));
+  xhr.send(body);
+  xhr.onload = handleAuthorizationResponse;
+}
+
+
+
+function handleAuthorizationResponse(){
+  if (this.status==200){
+    var data = JSON.parse(this.responseText);
+    console.log(data);
+    var data = JSON.parse(this.responseText);
+    if (data.access_token != undefined){
+      access_token=data.access_token;
+      localStorage.setItem("access_token", access_token);
+    }
+    if(data.refresh_token != undefined){
+      refresh_token = data.refresh_token;
+      localStorage.setItem("refresh_token", refresh_token);
+    }
+    onPageLoad();
+  }
+  else{console.log(this.responseText);
+    alert(this.responseText)
+  }
+}
+
+
+
+function getCode(){
+  var code= null;
+  var queryString = window.location.search;
+  if ( queryString.length > 0){
+    var urlParams = new URLSearchParams(queryString);
+    code = urlParams.get('code')
+  }
+  return code;
+}
 
   keyGen = function(){
       tempPass = '';
@@ -59,25 +134,6 @@ function createButtons(){
       
   }();
 
-  _getToken = function(){
-
-    result = fetch('https://accounts.spotify.com/api/token', {
-       method: 'POST',
-       headers: {
-           'Content-Type' : 'application/x-www-form-urlencoded', 
-           'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
-       },
-       body: 'grant_type=client_credentials'
-   });
-
-
-    data = result;
-    console.log(data);
-   return data.access_token;
-   
-   
-
-}();
 
 
 var searchArtists = function(query) {
@@ -88,7 +144,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQBBXZVdhXKzIY6cxWC2MZ2SHiJSLv-beKK2UPG113mTY_-cPT9_u5MJ29Viud33IsH-p7ql_GyU_Goud1E2do8AzmhFWzLaMMf23D3Y_cweAiib3w1UJBjy669BvEnAkAiAQjQoaeFvM8XRisikiGA"
+       "Authorization": "Bearer " + access_token
    },
    
    success: function(response) {
@@ -108,7 +164,7 @@ var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQBBXZVdhXKzIY6cxWC2MZ2SHiJSLv-beKK2UPG113mTY_-cPT9_u5MJ29Viud33IsH-p7ql_GyU_Goud1E2do8AzmhFWzLaMMf23D3Y_cweAiib3w1UJBjy669BvEnAkAiAQjQoaeFvM8XRisikiGA"
+         "Authorization": "Bearer " + access_token
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -156,16 +212,16 @@ var getTopTracks = function(query,id) {
    });
  };
 
-//  var getLyrics = function(query,arg){
-//      $.ajax({
-//          url: "https://api.lyrics.ovh/v1/" + query + "/" + arg,
-//          success: function(response) {
-//              console.log(response);
-//              lyricStuff = response.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
-//              lyricBox.innerHTML = lyricStuff;
-//          }
-//      })
-//  }
+ var getLyrics = function(query,arg){
+     $.ajax({
+         url: "https://api.lyrics.ovh/v1/" + query + "/" + arg,
+         success: function(response) {
+             console.log(response);
+             lyricStuff = response.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+             lyricBox.innerHTML = lyricStuff;
+         }
+     })
+ }
 
 
  document.getElementById('search-form').addEventListener('submit', function(e) {
@@ -217,19 +273,5 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
   });
 
 }
-
+requestAuthorization();
 createButtons();
-
-// function searchHistory() {
-//     button = document.createElement("button");
-//     button.setAttribute("style","width:100px");
-//     button.innerHTML = artistName.value;
-//     document.querySelectorAll('button')
-//     .forEach(button => {
-//       button.addEventListener('click', function() {
-//         searchArtists(target.textContent);
-//         getMusicVideos(target.textContent);
-//       });
-//     });
-//    }
-//     searchArea.appendChild(button);
