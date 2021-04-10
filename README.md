@@ -1,4 +1,4 @@
-# music-dashboard ![Logo](https://github.com/markosanchez800/music-dashboard/blob/Jamiesbranch/Logo%20Images/logo%20without%20borders%20red%20%26%20white_bg.png =250x)
+# Music Dashboard ![Logo](https://github.com/markosanchez800/music-dashboard/blob/Jamiesbranch/Logo%20Images/logo%20without%20borders%20red%20%26%20white_bg.png "Music-Dashboard")
 
 
 ## Screenshot of Site Display
