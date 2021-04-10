@@ -1,4 +1,4 @@
-artistName = document.getElementById('artistname'),
+artist = document.getElementById('artistname'),
 monthlyListen = document.getElementById('monthlyNumber'),
 artistInfo = document.getElementById('artistInfo'),
 trackOne = document.getElementById('trackOne'),
@@ -13,12 +13,13 @@ trackNine = document.getElementById('trackNine'),
 trackTen = document.getElementById('trackTen'),
 searchArea = document.getElementById('searchHistoree'),
 lyricBox = document.getElementById('lyrics')
-var searchStorage = localStorage.getItem("artists");
 var artists;
-if(searchStorage === null){
+var searchHistory = localStorage.getItem("artists");
+
+if(searchHistory === null){
     artists = [];
 }
-else{artists = JSON.parse(searchStorage);}
+else{artists = JSON.parse(searchHistory);}
  
 clientID = '9577ec53580a46c686cbb0729d57118e';
 clientSecret = '903925af8da34bbabffe55187620ca4b';
@@ -52,13 +53,13 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQBuYKFGuY8tpWmOGkTXfHXaLCDd7OgMoM2JUwngK0N1LPF9p6VQ1lsuBV--V9DQLOmv1lQDZkKV56LzK41d7NjgH_Bhl1M8-OSXHSq_wLFs6_PJvmOj-9h5LBzSB1PlOlWaP6NhwfFWY5ZJvH70etI"
+       "Authorization": "Bearer " + "BQDcsYHku_73giXSGrGyR8v6JhAmlWRO0gAMfql9iYuyvtw9IC7DiZfN7jgxHbyrTABqh8yD4dqpQYi9FHZZrox6oYzH1QpfKPFxuU5H6-ORwQiEamhbz2zKn8CiQk-gfnR5T1v6vj2Lg6-jpGYgqGA"
    },
    
    success: function(response) {
        tempPic = response.artists.items[0].images[0].url;
        artistInfo.setAttribute("style","background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(255,0,0,0)), url(" + tempPic + ")");
-       artistName.innerHTML = JSON.stringify(response.artists.items[0].name);
+       artist.innerHTML = JSON.stringify(response.artists.items[0].name);
        monthlyListen.innerHTML = JSON.stringify(response.artists.items[0].followers.total);
        id = response.artists.items[0].id;
        getTopTracks(query,id);
@@ -68,11 +69,41 @@ var searchArtists = function(query) {
  
 };
 
+function addButtons(){
+  
+  var form = document.getElementById("search-form");
+  var button = document.createElement("button");
+  var buttonText = document.createTextNode(artistName);
+  button.appendChild(buttonText);
+  form.appendChild(button);}
+
+function createButtons(){
+  for(var i =0; i<artists.length; i++){
+      function addButton(){
+          var buttonText = document.createTextNode(artists[i]);
+          var form = document.getElementById("search-form");
+          button = document.createElement("button");
+          button.appendChild(buttonText);
+          button.setAttribute("value",artists[i])
+          button.addEventListener("click", function(e){
+            e.preventDefault();
+          searchArtists(button.textContent);
+          })
+          form.appendChild(button);
+      
+      }
+          addButton();
+  }
+          }
+
+
+
+
 var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQBuYKFGuY8tpWmOGkTXfHXaLCDd7OgMoM2JUwngK0N1LPF9p6VQ1lsuBV--V9DQLOmv1lQDZkKV56LzK41d7NjgH_Bhl1M8-OSXHSq_wLFs6_PJvmOj-9h5LBzSB1PlOlWaP6NhwfFWY5ZJvH70etI"
+         "Authorization": "Bearer " + "BQDcsYHku_73giXSGrGyR8v6JhAmlWRO0gAMfql9iYuyvtw9IC7DiZfN7jgxHbyrTABqh8yD4dqpQYi9FHZZrox6oYzH1QpfKPFxuU5H6-ORwQiEamhbz2zKn8CiQk-gfnR5T1v6vj2Lg6-jpGYgqGA"
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -137,12 +168,13 @@ var getTopTracks = function(query,id) {
  console.log('success!')
  searchArtists(document.getElementById('searchbox').value);
  getMusicVideos(document.getElementById('searchbox').value);
+ addButtons();
  //searchHistory(document.getElementById('searchbox').value);
 }, false);
 
-document.getElementById('search-form').addEventListener('submit', function(e) {
-  searchHistory();
-})
+//document.getElementById('search-form').addEventListener('submit', function(e) {
+ // searchHistory();
+//})
 
 var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
 var maxResults = 10;
@@ -152,13 +184,15 @@ var musicVideos = document.getElementById("musicvideos")
 
 function getMusicVideos(){
     $("#musicvideos").empty();
-var artistName = document.getElementById("searchbox").value;
+ artistName = document.getElementById("searchbox").value;
 fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&part=snippet&maxResults='+maxResults+'&q='+artistName)
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     console.log(data);
+    artists.push(artistName);
+    localStorage.setItem("artists", JSON.stringify( artists ) );
         for(var i =0; i<data.items.length; i++){
             console.log(data.items[i].id.videoId)
             function addVideo(){
@@ -166,7 +200,7 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
                 var video = document.createElement("iframe");
                 video.setAttribute("width","210");
                 video.setAttribute("height", "158");
-                video.setAttribute("src","http://www.youtube.com/embed/"+vidID )
+                video.setAttribute("src","http://www.youtube.com/embed/"+vidID)
                 musicVideos.appendChild(video);
             
             }
@@ -178,6 +212,7 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
 
 }
 
+createButtons();
 /*
 function searchHistory() {
     //artists.push(artistName);
@@ -205,3 +240,4 @@ function searchHistory() {
 
 */
 
+//createButtons();
