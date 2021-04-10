@@ -29,9 +29,9 @@ Music-Dashboard contains the accessibilities for music like Spotify, the music v
 ![snippet-of-code](https://github.com/markosanchez800/music-dashboard/blob/Jamiesbranch/Screenshots/Code%20Snippet%20GIf.gif)
 
 ### Credits
-[Patrick Ly's Github](https://github.com/pattymcpat "Patrick Ly")
-[Marko Sanchez's Github](https://github.com/markosanchez800 "Marko Sanchez")
-[Jamie Forrester's Github](https://github.com/Forresterjamie01 "Jamie Forrester")
+* [Patrick Ly's Github](https://github.com/pattymcpat "Patrick Ly")
+* [Marko Sanchez's Github](https://github.com/markosanchez800 "Marko Sanchez")
+* [Jamie Forrester's Github](https://github.com/Forresterjamie01 "Jamie Forrester")
 
 
 [![Javascript badge](https://img.shields.io/badge/Javascript-95.4%25-yellow)](https://shields.io/)
