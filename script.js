@@ -156,7 +156,7 @@ document.getElementById('search-form').addEventListener('submit', function(e) {
   searchHistory();
 })
 
-//var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
+var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
 var maxResults = 10;
 var searchQuery = document.getElementById("searchbox")
 var video = ""
