@@ -12,7 +12,11 @@ trackEight = document.getElementById('trackEight'),
 trackNine = document.getElementById('trackNine'),
 trackTen = document.getElementById('trackTen'),
 searchArea = document.getElementById('searchHistoree'),
-lyricBox = document.getElementById('lyrics')
+lyricBox = document.getElementById('lyrics'),
+followerTitle = document.getElementById('montlhylisteners')
+var redirect_uri = "https://markosanchez800.github.io/music-dashboard/index.html"
+var AUTHORIZE = "https://accounts.spotify.com/authorize"
+
 var artists;
 var searchHistory = localStorage.getItem("artists");
 
@@ -21,31 +25,10 @@ if(searchHistory === null){
 }
 else{artists = JSON.parse(searchHistory);}
  
-clientID = '9577ec53580a46c686cbb0729d57118e';
-clientSecret = '903925af8da34bbabffe55187620ca4b';
-  
-  
-getToken = function(){
-
-    result = fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded', 
-            'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
-        },
-        body: 'grant_type=client_credentials'
-    });
-
-    data = result;
-    console.log(data.access_token);
-    return data.access_token;
-    
-};
-
 
 
 var searchArtists = function(query) {
-
+  
  $.ajax({
    url: 'https://api.spotify.com/v1/search',
    data: {
@@ -53,7 +36,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + "BQDcsYHku_73giXSGrGyR8v6JhAmlWRO0gAMfql9iYuyvtw9IC7DiZfN7jgxHbyrTABqh8yD4dqpQYi9FHZZrox6oYzH1QpfKPFxuU5H6-ORwQiEamhbz2zKn8CiQk-gfnR5T1v6vj2Lg6-jpGYgqGA"
+       "Authorization": "Bearer " + access_token
    },
    
    success: function(response) {
@@ -88,7 +71,7 @@ function createButtons(){
           button.addEventListener("click", function(e){
             e.preventDefault();
           searchArtists(button.textContent);
-          })
+          });
           form.appendChild(button);
       
       }
@@ -96,14 +79,87 @@ function createButtons(){
   }
           }
 
-
+          clientID = '6bdb7686b8a94fa48e6e7aa60d7c4c72';
+          clientSecret = 'cbc3d5f4c71143278b1bc315f060fb0c';
+          
+        function requestAuthorization(){
+        var url = AUTHORIZE; 
+        url +="?client_id="+clientID;
+        url +="&response_type=code";
+        url +="&redirect_uri="+encodeURI(redirect_uri);
+        url +="&show_dialog=true";
+        window.location.href = url;
+        
+          }
+        
+        function onPageLoad(){
+          if ( window.location.search.length > 0){
+            handleRedirect();
+          }
+        }
+        function handleRedirect(){
+          let code = getCode();
+          fetchAccessToken( code );
+        }
+        
+        function fetchAccessToken ( code ){
+          var body = "grant_type=authorization_code"; 
+          body += "$code="+code;
+          body += "&redirect_uri="+encodeURI(redirect_uri);
+          body += "&client_id="+clientID;
+          body += "&client_secret="+clientSecret;
+          callAuthorizationApi(body);
+        }
+        
+        function callAuthorizationApi(body){
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", TOKEN, true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.setRequestHeader('Authorization', 'Basic '+btoa(clientID + ':' + clientSecret));
+          xhr.send(body);
+          xhr.onload = handleAuthorizationResponse;
+        }
+        
+        
+        
+        function handleAuthorizationResponse(){
+          if (this.status==200){
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+            var data = JSON.parse(this.responseText);
+            if (data.access_token != undefined){
+              access_token=data.access_token;
+              localStorage.setItem("access_token", access_token);
+            }
+            if(data.refresh_token != undefined){
+              refresh_token = data.refresh_token;
+              localStorage.setItem("refresh_token", refresh_token);
+            }
+            onPageLoad();
+          }
+          else{console.log(this.responseText);
+            alert(this.responseText)
+          }
+        }
+        
+        
+        
+        function getCode(){
+          var code= null;
+          var queryString = window.location.search;
+          if ( queryString.length > 0){
+            var urlParams = new URLSearchParams(queryString);
+            code = urlParams.get('code')
+          }
+          return code;
+        }
 
 
 var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + "BQDcsYHku_73giXSGrGyR8v6JhAmlWRO0gAMfql9iYuyvtw9IC7DiZfN7jgxHbyrTABqh8yD4dqpQYi9FHZZrox6oYzH1QpfKPFxuU5H6-ORwQiEamhbz2zKn8CiQk-gfnR5T1v6vj2Lg6-jpGYgqGA"
+         "Authorization": "Bearer " + access_token
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -169,12 +225,9 @@ var getTopTracks = function(query,id) {
  searchArtists(document.getElementById('searchbox').value);
  getMusicVideos(document.getElementById('searchbox').value);
  addButtons();
- //searchHistory(document.getElementById('searchbox').value);
 }, false);
 
-//document.getElementById('search-form').addEventListener('submit', function(e) {
- // searchHistory();
-//})
+
 
 var apiKey= "AIzaSyAqMcywe4dEC4LFFRqaRmNyIPp3OK7DsMU";
 var maxResults = 10;
@@ -211,33 +264,5 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
   });
 
 }
-
+requestAuthorization();
 createButtons();
-/*
-function searchHistory() {
-    //artists.push(artistName);
-    //localStorage.setItem("artists", JSON.stringify(artists) );
-    button = document.createElement("button");
-    button.setAttribute("style","width:100px");
-    button.innerHTML = artistName.value;
-    document.querySelectorAll('button')
-    .forEach(button => {
-      button.addEventListener('click', function() {
-        searchArtists(target.textContent);
-        getMusicVideos(target.textContent);
-      });
-    });
-   
-   
-    // button.onclick = function(){
-    //    searchArtists(target.textContent);
-    //    getMusicVideos(target.textContent);
-   // }
-
-    searchArea.appendChild(button);
-}
-
-
-*/
-
-//createButtons();
