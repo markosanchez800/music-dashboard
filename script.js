@@ -14,8 +14,8 @@ trackTen = document.getElementById('trackTen'),
 searchArea = document.getElementById('searchHistoree'),
 lyricBox = document.getElementById('lyrics'),
 followerTitle = document.getElementById('montlhylisteners')
-var redirect_uri = "https://markosanchez800.github.io/music-dashboard/index.html"
-var AUTHORIZE = "https://accounts.spotify.com/authorize"
+//var redirect_uri = "https://markosanchez800.github.io/music-dashboard/index.html"
+//var AUTHORIZE = "https://accounts.spotify.com/authorize"
 
 var artists;
 var searchHistory = localStorage.getItem("artists");
@@ -25,6 +25,43 @@ if(searchHistory === null){
 }
 else{artists = JSON.parse(searchHistory);}
  
+clientID = '9577ec53580a46c686cbb0729d57118e';
+clientSecret = '903925af8da34bbabffe55187620ca4b';
+
+keyGen = function(){
+    tempPass = '';
+    charLim = 57;
+  possibleKeys= ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","x","y","z","0","1","2","3","4","5","6","7","8","9","_",".","-","~"];
+  for ( i=0; i < charLim; i++){
+      tempPass += possibleKeys[Math.floor(Math.random()*possibleKeys.length)];
+    }
+    console.log(tempPass);
+    return tempPass;
+    
+}();
+
+_getToken = function(){
+
+  result = fetch('https://accounts.spotify.com/api/token', {
+     method: 'POST',
+     headers: {
+         'Content-Type' : 'application/x-www-form-urlencoded', 
+         'Authorization' : 'Basic ' + btoa(clientID + ':' + clientSecret)
+     },
+     body: 'grant_type=client_credentials'
+ });
+
+
+  data = result;
+  console.log(data);
+ return data.access_token;
+ 
+ 
+
+}();
+
+
+
 
 
 var searchArtists = function(query) {
@@ -36,7 +73,7 @@ var searchArtists = function(query) {
      type: 'artist'
    },
    headers: {
-       "Authorization": "Bearer " + access_token
+       "Authorization": "Bearer " + 'BQA3BDJgabbx9Ly-k5GpUta396o9642VAY5hEYjufYW_TiaIM_KH5Q7CBAMydDKe5ssN9ZDfz0fLMTtV6Fj8RT_2OGFePqMWteJFYyHz2UZLSM5_w4Ag23uDnt33IejyOROUhcaZaEN6sMoM7QrLpco'
    },
    
    success: function(response) {
@@ -71,6 +108,7 @@ function createButtons(){
           button.addEventListener("click", function(e){
             e.preventDefault();
           searchArtists(button.textContent);
+          getMusicVideos(button.textContent);
           });
           form.appendChild(button);
       
@@ -78,7 +116,7 @@ function createButtons(){
           addButton();
   }
           }
-
+/*
           clientID = '6bdb7686b8a94fa48e6e7aa60d7c4c72';
           clientSecret = 'cbc3d5f4c71143278b1bc315f060fb0c';
           
@@ -100,6 +138,7 @@ function createButtons(){
         function handleRedirect(){
           let code = getCode();
           fetchAccessToken( code );
+          window.history.pushState("","",redirect_uri);
         }
         
         function fetchAccessToken ( code ){
@@ -153,13 +192,13 @@ function createButtons(){
           }
           return code;
         }
-
+*/
 
 var getTopTracks = function(query,id) {
    $.ajax({
      url: 'https://api.spotify.com/v1/artists/' + id + '/top-tracks?market=US',
      headers: {
-         "Authorization": "Bearer " + access_token
+         "Authorization": "Bearer " + 'BQA3BDJgabbx9Ly-k5GpUta396o9642VAY5hEYjufYW_TiaIM_KH5Q7CBAMydDKe5ssN9ZDfz0fLMTtV6Fj8RT_2OGFePqMWteJFYyHz2UZLSM5_w4Ag23uDnt33IejyOROUhcaZaEN6sMoM7QrLpco'
      },
      success: function(response) {
          trackOne.innerHTML = response.tracks[0].name;
@@ -264,5 +303,5 @@ fetch('https://www.googleapis.com/youtube/v3/search?key='+apiKey+'&type=video&pa
   });
 
 }
-requestAuthorization();
+//requestAuthorization();
 createButtons();
